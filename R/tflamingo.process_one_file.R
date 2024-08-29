@@ -18,16 +18,16 @@ tflamingo.process_one_file <- function(input_path,resolution,chr_name,opt_path,a
     chr_size <- getChromInfoFromUCSC(assembly)
     raw_df <- raw_data[,c(1,2,4)]
     chr_split_df <- split(raw_df,raw_df[,1])
-                         
-    path <- paste0(opt_path,chr_name)
+
+    path <- paste0(opt_path,"/",chr_name)
     if(!dir.exists(path)){
       dir.create(path,recursive = TRUE)
     }
     # check if there is any data for ith chr
-    if(!paste0('chr',as.character(i) ) %in% names(chr_split_df)){
-        next
+    if(!chr_name %in% names(chr_split_df)){
+        print("no data for this chromosome")
     }
-    tmp_mat <- generate_matrix(chr_split_df[[paste0('chr',as.character(i) )]],resolution,chr_size)
+    tmp_mat <- generate_matrix(chr_split_df[[chr_name]],resolution,chr_size)
     write.table(tmp_mat,paste0(path,"/Cell_",suffix,".txt"),col.names=F,row.names=F,sep='\t',quote=F)
 
 }

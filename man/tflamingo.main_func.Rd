@@ -5,6 +5,7 @@
 \title{tflamingo.main_func}
 \usage{
 tflamingo.main_func(
+  outputs_folder,
   idx,
   input_PD_high,
   input_IF_high,
@@ -13,14 +14,17 @@ tflamingo.main_func(
   domain_res,
   frag_res,
   chr_name,
-  downsampling_rates,
+  nThread,
+  sample_rate,
   lambda,
   max_dist,
-  nThread,
+  error_threshold,
   max_iter
 )
 }
 \arguments{
+\item{outputs_folder}{Folder to store intermediate outputs}
+
 \item{idx}{Cell index of the cell currently being calculated}
 
 \item{input_PD_high}{high-resolution input pairwise distance matrix}
@@ -37,25 +41,17 @@ tflamingo.main_func(
 
 \item{chr_name}{Name of the chromosome, e.g. chr1. Try strawr::readHicChroms() to see available chromosomes.}
 
+\item{nThread}{Number of thread avalable for the reconstruction. Default = 1.}
+
+\item{sample_rate}{Fraction of available entries in Hi-C to be used during the reconstruction. Default = 0.75.}
+
 \item{lambda}{Weights for all sampled entries. Default = 10.}
 
 \item{max_dist}{Maximum allowed distance betwee two consecutive points. Default = 0.01}
 
-\item{nThread}{Number of thread avalable for the reconstruction. Default = 1.}
+\item{error_threshold}{Error thresholds for reconstruction. Default = 1e-3.}
 
 \item{max_iter}{Maximum iterations. Default = 500.}
-
-\item{normalization}{Normalization method in .hic file. Try strawr::readHicNormTypes() to see available methods. Could be 'NONE'.}
-
-\item{sample_rate}{Fraction of available entries in Hi-C to be used during the reconstruction. Default = 0.75.}
-
-\item{r}{Weights for distance between consecutive points. Default = 1.}
-
-\item{alpha}{Convertion factor between interaction frequency and pairwise distance. Default = -0.25.}
-
-\item{inf_dist}{Maximun allowed distance betwee any two points. Default = 2.}
-
-\item{error_threshold}{Error thresholds for reconstruction. Default = 1e-3.}
 }
 \value{
 A data.frame containing the FLAMINGO predicted 3D structure.

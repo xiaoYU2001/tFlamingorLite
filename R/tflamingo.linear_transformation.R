@@ -1,6 +1,7 @@
 #' tflamingo.linear_transformation
 #'
 #' Transform the all scHi-C IF matrices to the same range as bulk IF with 1D distance-awared linear function
+#' @param code_path file path of tFlamingorLite
 #' @param chr_name Name of the chromosome, e.g. chr1.
 #' @param resolution Resolution of the IF matrices, e.g. 10000.
 #' @param input_path Path containing the scHi-C IF matrices of all chromosomes; will search for the IF matrices in the sub-folder named by the chr_name
@@ -10,9 +11,10 @@
 #' @return None
 #' @export
 
-tflamingo.linear_transformation <- function(chr_name,resolution,input_path,opt_path,assembly){
+tflamingo.linear_transformation <- function(code_path,chr_name,resolution,input_path,opt_path,assembly){
+    load(paste0(code_path,"/tFlamingorLite/R/sysdata.rda"))
     chr_size <- getChromInfoFromUCSC(assembly)
-    setwd(paste0(input_path,chr_name))
+    setwd(paste0(input_path,"/",chr_name))
     file <- dir()
     file = file[grep('Cell',file)]
     order_id <- as.numeric(sapply(strsplit(file,'_|[.]'),function(x){x[2]}))
@@ -54,10 +56,10 @@ tflamingo.linear_transformation <- function(chr_name,resolution,input_path,opt_p
         transfered_if <- do.call(rbind,transfered_if)
         N <- floor(chr_size[match(chr_name,chr_size[,1]),2]/resolution)+1
         tf_mat <- Matrix::sparseMatrix(
-        i = transfered_if[,1], 
-        j = transfered_if[,2], 
+        i = transfered_if[,1],
+        j = transfered_if[,2],
         x = transfered_if[,3],
-        dims = c(N, N), 
+        dims = c(N, N),
         )
         pred_sc_if[[i]] <- as.matrix(exp(tf_mat)-1)
     }

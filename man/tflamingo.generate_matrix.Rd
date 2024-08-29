@@ -4,12 +4,14 @@
 \alias{tflamingo.generate_matrix}
 \title{tflamingo.generate_matrix}
 \usage{
-tflamingo.generate_matrix(input_path, resolution, opt_path, assembly)
+tflamingo.generate_matrix(input_path, resolution, chr_name, opt_path, assembly)
 }
 \arguments{
 \item{input_path}{Path containing the scHi-C IF matrices of all chromosomes; will search for the IF matrices in the sub-folder named by the chr_name}
 
 \item{resolution}{Resolution of the IF matrices, e.g. 10000.}
+
+\item{chr_name}{chromosome name}
 
 \item{opt_path}{path to write the imputed IF matrices.}
 

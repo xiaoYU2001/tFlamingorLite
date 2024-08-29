@@ -5,6 +5,7 @@
 \title{tflamingo.linear_transformation}
 \usage{
 tflamingo.linear_transformation(
+  code_path,
   chr_name,
   resolution,
   input_path,
@@ -13,6 +14,8 @@ tflamingo.linear_transformation(
 )
 }
 \arguments{
+\item{code_path}{file path of tFlamingorLite}
+
 \item{chr_name}{Name of the chromosome, e.g. chr1.}
 
 \item{resolution}{Resolution of the IF matrices, e.g. 10000.}

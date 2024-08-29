@@ -1,4 +1,3 @@
-#setClass("flamingo", slots=list(IF="sparseMatrix", n_frag='numeric',chr_name='character'))
 setClass("flamingo", slots=list(IF="matrix", PD='matrix',n_frag='numeric',chr_name='character'))
 setClass("flamingo_prediction", slots=list(id="numeric", coordinates='matrix',input_n='numeric'))
 
